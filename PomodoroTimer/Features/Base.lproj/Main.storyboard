@@ -59,13 +59,37 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOg-QN-wk9">
+                                <rect key="frame" x="172.5" y="553" width="30.5" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TASK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzF-7l-n6e">
+                                <rect key="frame" x="102" y="553.5" width="30.5" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LONG REST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHC-Fp-GHw">
+                                <rect key="frame" x="243" y="553.5" width="67.5" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="oHC-Fp-GHw" firstAttribute="leading" secondItem="nOg-QN-wk9" secondAttribute="trailing" constant="40" id="3Av-4c-oNP"/>
+                            <constraint firstItem="nOg-QN-wk9" firstAttribute="top" secondItem="Lnp-Dc-lp7" secondAttribute="bottom" constant="38.5" id="5bw-Rc-whD"/>
+                            <constraint firstItem="nOg-QN-wk9" firstAttribute="leading" secondItem="pzF-7l-n6e" secondAttribute="trailing" constant="40" id="6N2-Cm-RE9"/>
+                            <constraint firstItem="oHC-Fp-GHw" firstAttribute="centerY" secondItem="nOg-QN-wk9" secondAttribute="centerY" id="6zo-zj-o4e"/>
                             <constraint firstItem="beE-WH-5Lf" firstAttribute="centerY" secondItem="TZR-Ua-fx5" secondAttribute="centerY" id="72B-xU-86x"/>
                             <constraint firstItem="sLT-dI-FPs" firstAttribute="centerX" secondItem="TZR-Ua-fx5" secondAttribute="centerX" id="78a-iU-ILl"/>
+                            <constraint firstItem="pzF-7l-n6e" firstAttribute="centerY" secondItem="nOg-QN-wk9" secondAttribute="centerY" id="BLv-Us-bR7"/>
                             <constraint firstItem="beE-WH-5Lf" firstAttribute="top" secondItem="sLT-dI-FPs" secondAttribute="bottom" constant="67.5" id="DNL-GS-kXA"/>
                             <constraint firstItem="Lnp-Dc-lp7" firstAttribute="centerX" secondItem="beE-WH-5Lf" secondAttribute="centerX" id="F5p-7w-j7r"/>
+                            <constraint firstItem="nOg-QN-wk9" firstAttribute="centerX" secondItem="Lnp-Dc-lp7" secondAttribute="centerX" id="Z2h-Mt-jRI"/>
                             <constraint firstItem="Fla-xu-iPu" firstAttribute="top" secondItem="TZR-Ua-fx5" secondAttribute="top" constant="80" id="ZLc-Pe-tAs"/>
                             <constraint firstItem="8lg-Cw-TRb" firstAttribute="centerY" secondItem="Fla-xu-iPu" secondAttribute="centerY" id="aPH-3r-5BX"/>
                             <constraint firstItem="Fla-xu-iPu" firstAttribute="leading" secondItem="fRL-kp-FMr" secondAttribute="trailing" constant="40" id="cIo-zl-ike"/>
@@ -78,11 +102,14 @@
                         <viewLayoutGuide key="safeArea" id="TZR-Ua-fx5"/>
                     </view>
                     <connections>
+                        <outlet property="longRestDisplayLabel" destination="oHC-Fp-GHw" id="l0V-Q0-HzK"/>
                         <outlet property="longRestTimeLabel" destination="8lg-Cw-TRb" id="ePJ-AA-faF"/>
                         <outlet property="playStopButton" destination="Lnp-Dc-lp7" id="vDm-4p-Ao8"/>
+                        <outlet property="restDisplayLabel" destination="nOg-QN-wk9" id="tvh-xv-Tkh"/>
                         <outlet property="restTimeLabel" destination="Fla-xu-iPu" id="Opl-r0-y3l"/>
                         <outlet property="roundCounterLabel" destination="sLT-dI-FPs" id="w2n-oY-2lg"/>
                         <outlet property="roundTimeLabel" destination="fRL-kp-FMr" id="xzO-eg-OU6"/>
+                        <outlet property="taskDisplayLabel" destination="pzF-7l-n6e" id="mS1-ry-Nh3"/>
                         <outlet property="timerLabel" destination="beE-WH-5Lf" id="yBN-Ru-2SD"/>
                     </connections>
                 </viewController>

@@ -26,6 +26,10 @@ class PTHomeViewController: UIViewController {
     @IBOutlet weak var roundCounterLabel: UILabel!
     @IBOutlet weak var playStopButton: UIButton!
     
+    @IBOutlet weak var taskDisplayLabel: UILabel!
+    @IBOutlet weak var restDisplayLabel: UILabel!
+    @IBOutlet weak var longRestDisplayLabel: UILabel!
+    
     // MARK: - Overridden methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,19 +49,19 @@ class PTHomeViewController: UIViewController {
     // MARK: - Private methods
     private func setupRx() {
         viewModel.currentTime.asObservable().bind(onNext: { value in
-            self.timerLabel.text = "\(value)"
+            self.timerLabel.text = value.secondsToFormattedTimeString() // "\(value)"
         }).disposed(by: disposeBag)
         
         viewModel.roundTime.asObserver().bind(onNext: { value in
-            self.roundTimeLabel.text = "\(value)"
+            self.roundTimeLabel.text = value.secondsToFormattedTimeString() // "\(value)"
         }).disposed(by: disposeBag)
         
         viewModel.restTime.asObserver().bind(onNext: { value in
-            self.restTimeLabel.text = "\(value)"
+            self.restTimeLabel.text = value.secondsToFormattedTimeString() // "\(value)"
         }).disposed(by: disposeBag)
         
         viewModel.longRestTime.asObserver().bind(onNext: { value in
-            self.longRestTimeLabel.text = "\(value)"
+            self.longRestTimeLabel.text = value.secondsToFormattedTimeString() // "\(value)"
         }).disposed(by: disposeBag)
         
         viewModel.roundCounter.asObserver().bind(onNext: { value in
@@ -65,12 +69,38 @@ class PTHomeViewController: UIViewController {
         }).disposed(by: disposeBag)
         
         viewModel.timerStatus.asObservable().bind(onNext: { status in
-            if status == .none {
+            
+            switch status {
+            case .none:
+                self.updateDisplayLabels()
                 self.changePlayStopButton(playing: false)
-            } else {
+            case .task:
+                self.updateDisplayLabels()
                 self.changePlayStopButton(playing: true)
+                self.taskDisplayLabel.isUserInteractionEnabled = true
+                self.taskDisplayLabel.alpha = 1
+            case .rest:
+                self.updateDisplayLabels()
+                self.changePlayStopButton(playing: true)
+                self.restDisplayLabel.isUserInteractionEnabled = true
+                self.restDisplayLabel.alpha = 1
+            case .longRest:
+                self.updateDisplayLabels()
+                self.changePlayStopButton(playing: true)
+                self.longRestDisplayLabel.isUserInteractionEnabled = true
+                self.longRestDisplayLabel.alpha = 1
             }
         }).disposed(by: disposeBag)
+    }
+    
+    private func updateDisplayLabels() {
+        taskDisplayLabel.alpha = 0.3
+        restDisplayLabel.alpha = 0.3
+        longRestDisplayLabel.alpha = 0.3
+        
+        taskDisplayLabel.isUserInteractionEnabled = false
+        restDisplayLabel.isUserInteractionEnabled = false
+        longRestDisplayLabel.isUserInteractionEnabled = false
     }
     
     private func changePlayStopButton(playing: Bool) {
