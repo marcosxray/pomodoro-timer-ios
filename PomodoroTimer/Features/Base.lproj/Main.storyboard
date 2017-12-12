@@ -24,20 +24,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ias-8T-7mh">
-                                <rect key="frame" x="47.5" y="464.5" width="80" height="50"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="fA8-NV-56S"/>
-                                    <constraint firstAttribute="width" constant="80" id="ven-Yr-vtB"/>
-                                </constraints>
-                                <state key="normal" title="Start">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="startDidTouch:" destination="kNx-Fy-e9i" eventType="touchUpInside" id="QhB-Pk-PLw"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lnp-Dc-lp7">
                                 <rect key="frame" x="147.5" y="464.5" width="80" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -48,9 +34,6 @@
                                 <state key="normal" title="Stop">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <connections>
-                                    <action selector="stopDidTouch:" destination="kNx-Fy-e9i" eventType="touchUpInside" id="uSV-K3-OhS"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RoundTime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRL-kp-FMr">
                                 <rect key="frame" x="24.5" y="100" width="87" height="21"/>
@@ -87,17 +70,16 @@
                             <constraint firstItem="8lg-Cw-TRb" firstAttribute="centerY" secondItem="Fla-xu-iPu" secondAttribute="centerY" id="aPH-3r-5BX"/>
                             <constraint firstItem="Fla-xu-iPu" firstAttribute="leading" secondItem="fRL-kp-FMr" secondAttribute="trailing" constant="40" id="cIo-zl-ike"/>
                             <constraint firstItem="fRL-kp-FMr" firstAttribute="centerY" secondItem="Fla-xu-iPu" secondAttribute="centerY" id="kcH-Db-MeP"/>
-                            <constraint firstItem="Ias-8T-7mh" firstAttribute="centerY" secondItem="Lnp-Dc-lp7" secondAttribute="centerY" id="kl8-KF-M3Z"/>
                             <constraint firstItem="Fla-xu-iPu" firstAttribute="centerX" secondItem="TZR-Ua-fx5" secondAttribute="centerX" id="lJf-wk-ISR"/>
                             <constraint firstItem="8lg-Cw-TRb" firstAttribute="leading" secondItem="Fla-xu-iPu" secondAttribute="trailing" constant="40" id="qQy-Oc-eAt"/>
                             <constraint firstItem="beE-WH-5Lf" firstAttribute="centerX" secondItem="TZR-Ua-fx5" secondAttribute="centerX" id="thf-Rm-GVP"/>
-                            <constraint firstItem="Lnp-Dc-lp7" firstAttribute="leading" secondItem="Ias-8T-7mh" secondAttribute="trailing" constant="20" id="v7e-w5-TRY"/>
                             <constraint firstItem="Lnp-Dc-lp7" firstAttribute="top" secondItem="beE-WH-5Lf" secondAttribute="bottom" constant="85" id="wov-Hz-buj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TZR-Ua-fx5"/>
                     </view>
                     <connections>
                         <outlet property="longRestTimeLabel" destination="8lg-Cw-TRb" id="ePJ-AA-faF"/>
+                        <outlet property="playStopButton" destination="Lnp-Dc-lp7" id="vDm-4p-Ao8"/>
                         <outlet property="restTimeLabel" destination="Fla-xu-iPu" id="Opl-r0-y3l"/>
                         <outlet property="roundCounterLabel" destination="sLT-dI-FPs" id="w2n-oY-2lg"/>
                         <outlet property="roundTimeLabel" destination="fRL-kp-FMr" id="xzO-eg-OU6"/>

@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-enum TimerState {
+enum TimerStatus {
     case none
     case task
     case rest
@@ -20,12 +20,13 @@ class PTPomodoroManager {
     
     // MARK: - Internal variables
     var currentTime = BehaviorSubject<Int>(value: PTConstants.initialRoundTime)
+    var timerStatus = BehaviorSubject<TimerStatus>(value: .none)
     
     var roundTime = Variable<Int>(PTConstants.initialRoundTime)
     var restTime = Variable<Int>(PTConstants.initialRestTime)
     var longRestTime = Variable<Int>(PTConstants.initialLongRestTime)
     var roundCounter = Variable<Int>(0)
-    var timerState = Variable<TimerState>(.none)
+    var _timerStatus = Variable<TimerStatus>(.none)
     
     var disposeBag = DisposeBag()
     
@@ -40,81 +41,86 @@ class PTPomodoroManager {
     // MARK: - Private methods
     private func setupRx() {
         
-        /////////-----------------------
+        _timerStatus.asObservable().subscribe(onNext: { value in
+            self.timerStatus.onNext(value)
+        }).disposed(by: disposeBag)
+        
         timer.currentTime.asObserver().subscribe(onNext: { value in
             
-            var time: Int = 0
-            
-            switch self.timerState.value {
+            guard value == 0 else {
+                var time: Int = 0
                 
-            case .task:
-                time = self.roundTime.value - value
+                switch self._timerStatus.value {
+                case .task:
+                    time = self.roundTime.value - value
+                case .rest:
+                    time = self.restTime.value - value
+                case .longRest:
+                    time = self.longRestTime.value - value
+                case .none:
+                    time = self.roundTime.value
+                }
                 
-            case .rest:
-                time = self.restTime.value - value
-                
-            case .longRest:
-                time = self.longRestTime.value - value
-                
-            case .none:
-                time = self.roundTime.value
-            }
-            
-            self.currentTime.onNext(time)
-            
-        }).disposed(by: disposeBag)
-        
-        
-        
-        /////////-----------------------
-        self.timerState.asObservable().distinctUntilChanged().subscribe(onNext: { state in
-            
-            if state != .none {
-                self.startTimer()
-                print("start")
-            } else {
-                self.stopTimer()
-                print("stop")
+                self.currentTime.onNext(time)
+                return
             }
             
         }).disposed(by: disposeBag)
         
         
+        self.currentTime.asObserver().filter({ $0 == 0 }).subscribe(onNext: { _ in
 
-        /////////-----------------------
-        self.currentTime.asObserver().filter({ $0 == 0 }).subscribe(onNext: { value in
-            
-            switch self.timerState.value {
-
+            switch self._timerStatus.value {
             case .task:
-
                 if self.roundCounter.value < PTConstants.pomodoroRounds {
-                    self.timerState.value = .rest
+                    self._timerStatus.value = .rest
                 } else {
-                    self.timerState.value = .longRest
+                    self._timerStatus.value = .longRest
                     self.roundCounter.value = 0
                 }
-
-            case .none:
-                self.roundCounter.value = 0
-
+            case .rest, .longRest:
+                self._timerStatus.value = .task
             default:
-                self.timerState.value = .task
-                print("")
+                self.roundCounter.value = 0
             }
             
         }).disposed(by: disposeBag)
+        
+        
+        self._timerStatus.asObservable().subscribe(onNext: { state in
+            
+            if state != .none {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    self.startTimer()
+                    if state == .task { self.roundCounter.value += 1 }
+                }
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    self.roundCounter.value = 0
+                    self.currentTime.onNext(self.roundTime.value)
+                    self.stopTimer()
+                }
+            }
+        }).disposed(by: disposeBag)
+        
+    }
+    
+    private func startTimer() {
+        timer.start()
+    }
+    
+    private func stopTimer() {
+        timer.stop()
+        timer.reset()
     }
     
     // MARK: - Internal methods
-    func startTimer() {
-        timer.start()
-        if timerState.value == .task { self.roundCounter.value += 1 }
+    func startPomodoro() {
+        _timerStatus.value = .task
     }
     
-    func stopTimer() {
-        timer.stop()
-        timer.reset()
+    func stopPomodoro() {
+        _timerStatus.value = .none
     }
 }
 

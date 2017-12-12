@@ -17,6 +17,7 @@ class PTHomeViewModel {
     var restTime = BehaviorSubject<Int>(value: 0)
     var longRestTime = BehaviorSubject<Int>(value: 0)
     var roundCounter = BehaviorSubject<Int>(value: 0)
+    var timerStatus = BehaviorSubject<TimerStatus>(value: .none)
     
     // MARK: - Private variables
     private let pomodoroManager = PTPomodoroManager()
@@ -48,17 +49,19 @@ class PTHomeViewModel {
         pomodoroManager.roundCounter.asObservable().subscribe(onNext: { value in
             self.roundCounter.onNext(value)
         }).disposed(by: disposeBag)
+        
+        pomodoroManager.timerStatus.asObservable().subscribe(onNext: { state in
+            self.timerStatus.onNext(state)
+        }).disposed(by: disposeBag)
     }
     
     // MARK: - Internal methods
     func startTimer() {
-//        pomodoroManager.startTimer()
-        pomodoroManager.timerState.value = .task
+        pomodoroManager.startPomodoro()
     }
     
     func stopTimer() {
-//        pomodoroManager.stopTimer()
-        pomodoroManager.timerState.value = .none
+        pomodoroManager.stopPomodoro()
     }
     
     func updateRoundTime(roundTime:Int) {
