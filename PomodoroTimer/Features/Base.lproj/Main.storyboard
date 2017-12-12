@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kNx-Fy-e9i">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Home View Controller-->
+        <scene sceneID="UbX-BE-eO4">
+            <objects>
+                <viewController id="kNx-Fy-e9i" customClass="PTHomeViewController" customModule="PomodoroTimer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GeW-uo-Gn7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beE-WH-5Lf">
+                                <rect key="frame" x="109.5" y="307.5" width="156.5" height="72"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="60"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ias-8T-7mh">
+                                <rect key="frame" x="47.5" y="464.5" width="80" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="fA8-NV-56S"/>
+                                    <constraint firstAttribute="width" constant="80" id="ven-Yr-vtB"/>
+                                </constraints>
+                                <state key="normal" title="Start">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="startDidTouch:" destination="kNx-Fy-e9i" eventType="touchUpInside" id="QhB-Pk-PLw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lnp-Dc-lp7">
+                                <rect key="frame" x="147.5" y="464.5" width="80" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="FJA-yb-FYy"/>
+                                    <constraint firstAttribute="width" constant="80" id="Rgv-gG-cTV"/>
+                                </constraints>
+                                <state key="normal" title="Stop">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopDidTouch:" destination="kNx-Fy-e9i" eventType="touchUpInside" id="uSV-K3-OhS"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RoundTime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRL-kp-FMr">
+                                <rect key="frame" x="24.5" y="100" width="87" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LongRestTime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8lg-Cw-TRb">
+                                <rect key="frame" x="263" y="100" width="109.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RestTime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fla-xu-iPu">
+                                <rect key="frame" x="151.5" y="100" width="71.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RoundCounter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sLT-dI-FPs">
+                                <rect key="frame" x="132" y="219" width="111" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="beE-WH-5Lf" firstAttribute="centerY" secondItem="TZR-Ua-fx5" secondAttribute="centerY" id="72B-xU-86x"/>
+                            <constraint firstItem="sLT-dI-FPs" firstAttribute="centerX" secondItem="TZR-Ua-fx5" secondAttribute="centerX" id="78a-iU-ILl"/>
+                            <constraint firstItem="beE-WH-5Lf" firstAttribute="top" secondItem="sLT-dI-FPs" secondAttribute="bottom" constant="67.5" id="DNL-GS-kXA"/>
+                            <constraint firstItem="Lnp-Dc-lp7" firstAttribute="centerX" secondItem="beE-WH-5Lf" secondAttribute="centerX" id="F5p-7w-j7r"/>
+                            <constraint firstItem="Fla-xu-iPu" firstAttribute="top" secondItem="TZR-Ua-fx5" secondAttribute="top" constant="80" id="ZLc-Pe-tAs"/>
+                            <constraint firstItem="8lg-Cw-TRb" firstAttribute="centerY" secondItem="Fla-xu-iPu" secondAttribute="centerY" id="aPH-3r-5BX"/>
+                            <constraint firstItem="Fla-xu-iPu" firstAttribute="leading" secondItem="fRL-kp-FMr" secondAttribute="trailing" constant="40" id="cIo-zl-ike"/>
+                            <constraint firstItem="fRL-kp-FMr" firstAttribute="centerY" secondItem="Fla-xu-iPu" secondAttribute="centerY" id="kcH-Db-MeP"/>
+                            <constraint firstItem="Ias-8T-7mh" firstAttribute="centerY" secondItem="Lnp-Dc-lp7" secondAttribute="centerY" id="kl8-KF-M3Z"/>
+                            <constraint firstItem="Fla-xu-iPu" firstAttribute="centerX" secondItem="TZR-Ua-fx5" secondAttribute="centerX" id="lJf-wk-ISR"/>
+                            <constraint firstItem="8lg-Cw-TRb" firstAttribute="leading" secondItem="Fla-xu-iPu" secondAttribute="trailing" constant="40" id="qQy-Oc-eAt"/>
+                            <constraint firstItem="beE-WH-5Lf" firstAttribute="centerX" secondItem="TZR-Ua-fx5" secondAttribute="centerX" id="thf-Rm-GVP"/>
+                            <constraint firstItem="Lnp-Dc-lp7" firstAttribute="leading" secondItem="Ias-8T-7mh" secondAttribute="trailing" constant="20" id="v7e-w5-TRY"/>
+                            <constraint firstItem="Lnp-Dc-lp7" firstAttribute="top" secondItem="beE-WH-5Lf" secondAttribute="bottom" constant="85" id="wov-Hz-buj"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="TZR-Ua-fx5"/>
+                    </view>
+                    <connections>
+                        <outlet property="longRestTimeLabel" destination="8lg-Cw-TRb" id="ePJ-AA-faF"/>
+                        <outlet property="restTimeLabel" destination="Fla-xu-iPu" id="Opl-r0-y3l"/>
+                        <outlet property="roundCounterLabel" destination="sLT-dI-FPs" id="w2n-oY-2lg"/>
+                        <outlet property="roundTimeLabel" destination="fRL-kp-FMr" id="xzO-eg-OU6"/>
+                        <outlet property="timerLabel" destination="beE-WH-5Lf" id="yBN-Ru-2SD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YMU-xS-qG2" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="113" y="117"/>
+        </scene>
+    </scenes>
+</document>
