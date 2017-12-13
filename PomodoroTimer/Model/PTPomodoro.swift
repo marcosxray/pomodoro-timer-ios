@@ -8,19 +8,19 @@
 
 import Foundation
 
-enum PomodoroState {
-    case none
-    case running
+enum PomodoroStatus {
+//    case none
+//    case running
     case stopped
     case finished
 }
 
 struct PTPomodoro {
-    let status: PomodoroState
+    let status: PomodoroStatus
     let date: Date
     let time: Int
     
-    init(status: PomodoroState, time: Int) {
+    init(status: PomodoroStatus, time: Int) {
         self.status = status
         self.time = time
         self.date = Date()

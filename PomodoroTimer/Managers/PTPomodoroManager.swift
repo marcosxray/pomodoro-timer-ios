@@ -71,6 +71,7 @@ class PTPomodoroManager {
         self.currentTime.asObserver().filter({ $0 == 0 }).subscribe(onNext: { _ in
 
             switch self._timerStatus.value {
+                
             case .task:
                 if self.roundCounter.value < PTConstants.pomodoroRounds {
                     self._timerStatus.value = .rest
@@ -78,8 +79,12 @@ class PTPomodoroManager {
                     self._timerStatus.value = .longRest
                     self.roundCounter.value = 0
                 }
+                
+                self.pomodoroDidFinish()
+                
             case .rest, .longRest:
                 self._timerStatus.value = .task
+                
             default:
                 self.roundCounter.value = 0
             }
@@ -103,6 +108,10 @@ class PTPomodoroManager {
             }
         }).disposed(by: disposeBag)
         
+    }
+    
+    private func pomodoroDidFinish() {
+        PTNotification.fireNotification()
     }
     
     private func startTimer() {
