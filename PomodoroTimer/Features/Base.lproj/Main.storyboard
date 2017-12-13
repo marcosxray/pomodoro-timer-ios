@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="kNx-Fy-e9i">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eBH-un-TUS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
+        <!--Timer-->
         <scene sceneID="UbX-BE-eO4">
             <objects>
                 <viewController id="kNx-Fy-e9i" customClass="PTHomeViewController" customModule="PomodoroTimer" customModuleProvider="target" sceneMemberID="viewController">
@@ -104,6 +103,7 @@
                             <constraint firstItem="Lnp-Dc-lp7" firstAttribute="top" secondItem="beE-WH-5Lf" secondAttribute="bottom" constant="85" id="wov-Hz-buj"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Timer" id="TfY-11-IHK"/>
                     <connections>
                         <outlet property="longRestDisplayLabel" destination="oHC-Fp-GHw" id="l0V-Q0-HzK"/>
                         <outlet property="longRestTimeLabel" destination="8lg-Cw-TRb" id="ePJ-AA-faF"/>
@@ -118,7 +118,44 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YMU-xS-qG2" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="113" y="117"/>
+            <point key="canvasLocation" x="452" y="116.49175412293854"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="VC1-eS-mdj">
+            <objects>
+                <viewController id="Fyi-b7-QVq" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yGA-Va-M5E"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yom-TI-xxt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hvj-eE-aJY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="History" id="3rJ-8i-J8U"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GH1-05-Rdg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1180" y="116"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="vxo-L7-ndc">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="eBH-un-TUS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3N1-9v-Wvg">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="kNx-Fy-e9i" kind="relationship" relationship="viewControllers" id="7T8-ZK-ajh"/>
+                        <segue destination="Fyi-b7-QVq" kind="relationship" relationship="viewControllers" id="1G0-og-QJd"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KRN-qM-IJ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-359" y="116"/>
         </scene>
     </scenes>
 </document>

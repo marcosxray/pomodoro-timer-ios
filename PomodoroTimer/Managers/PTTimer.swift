@@ -37,13 +37,7 @@ class PTTimer {
         stop()
         reset()
         
-//        if #available(iOS 10.0, *) {
-//            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
-//                self.updateCurrentTime()
-//            })
-//        } else {
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateCurrentTime), userInfo: nil, repeats: true)
-//        }
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateCurrentTime), userInfo: nil, repeats: true)
     }
     
     func stop() {

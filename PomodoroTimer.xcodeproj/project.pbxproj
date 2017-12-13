@@ -22,6 +22,7 @@
 		8D113EDB1FDFC30300F0488A /* PTHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D113EDA1FDFC30300F0488A /* PTHomeViewController.swift */; };
 		8D113EDE1FDFCBA100F0488A /* PTPomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D113EDD1FDFCBA100F0488A /* PTPomodoro.swift */; };
 		8D92255C1FE1120B00726CCB /* PTNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D92255B1FE1120B00726CCB /* PTNotification.swift */; };
+		8DBBE54F1FE12BE800D8C91E /* PTStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBBE54E1FE12BE800D8C91E /* PTStorage.swift */; };
 		CE85D3A5DD5728587CA0DF14 /* Pods_PomodoroTimerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7187B7A99C7B3343E341133 /* Pods_PomodoroTimerUITests.framework */; };
 		F91B4F5AF40C1AA1A6B1850F /* Pods_PomodoroTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39C387355A1893D038E9A18 /* Pods_PomodoroTimer.framework */; };
 /* End PBXBuildFile section */
@@ -66,6 +67,7 @@
 		8D113EDA1FDFC30300F0488A /* PTHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTHomeViewController.swift; sourceTree = "<group>"; };
 		8D113EDD1FDFCBA100F0488A /* PTPomodoro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTPomodoro.swift; sourceTree = "<group>"; };
 		8D92255B1FE1120B00726CCB /* PTNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTNotification.swift; sourceTree = "<group>"; };
+		8DBBE54E1FE12BE800D8C91E /* PTStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTStorage.swift; sourceTree = "<group>"; };
 		94962AB8F24A99ECEFAD8678 /* Pods_PomodoroTimerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PomodoroTimerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B764D7562308AE9636F6CFA2 /* Pods-PomodoroTimer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PomodoroTimer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PomodoroTimer/Pods-PomodoroTimer.debug.xcconfig"; sourceTree = "<group>"; };
 		BE241A5BF48F099C980CBD9D /* Pods-PomodoroTimerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PomodoroTimerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PomodoroTimerUITests/Pods-PomodoroTimerUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				8D113ED41FDFC21400F0488A /* PTPomodoroManager.swift */,
 				8D113ED61FDFC23C00F0488A /* PTConstants.swift */,
 				8D92255B1FE1120B00726CCB /* PTNotification.swift */,
+				8DBBE54E1FE12BE800D8C91E /* PTStorage.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D92255C1FE1120B00726CCB /* PTNotification.swift in Sources */,
+				8DBBE54F1FE12BE800D8C91E /* PTStorage.swift in Sources */,
 				8D113EDB1FDFC30300F0488A /* PTHomeViewController.swift in Sources */,
 				8D113ED71FDFC23C00F0488A /* PTConstants.swift in Sources */,
 				8D113EDE1FDFCBA100F0488A /* PTPomodoro.swift in Sources */,

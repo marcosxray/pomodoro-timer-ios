@@ -11,13 +11,20 @@ import AVFoundation
 
 struct PTNotification {
     
-    static func fireNotification() {
+    static func advertisePomodoro(pomodoro: PTPomodoro) {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.post(name: NSNotification.Name(rawValue: PTConstants.NOTIFICATION_KEY), object: nil)
+        
+        PTNotification.playSound()
+        PTNotification.fireLocalNotification()
+    }
+    
+    static func fireLocalNotification() {
         let notification = UILocalNotification()
         notification.fireDate = Date(timeIntervalSinceNow: 5)
         notification.alertBody = "You've finished a pomodoro. Well done!"
         notification.soundName = UILocalNotificationDefaultSoundName
         UIApplication.shared.scheduleLocalNotification(notification)
-        PTNotification.playSound()
     }
     
     static func playSound() {

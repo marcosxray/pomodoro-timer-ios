@@ -12,4 +12,6 @@ struct PTConstants {
     static let initialRestTime = 3 // * 60
     static let initialLongRestTime = 5 // * 60
     static let pomodoroRounds = 4
+    
+    static let NOTIFICATION_KEY = "NewPomodoroNotification"
 }

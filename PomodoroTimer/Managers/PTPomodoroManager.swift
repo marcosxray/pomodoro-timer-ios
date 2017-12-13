@@ -30,6 +30,8 @@ class PTPomodoroManager {
     
     var disposeBag = DisposeBag()
     
+    fileprivate var timeCounter: Int = 0
+    
     // MARK: Private variables
     private let timer = PTTimer.shared
     
@@ -62,6 +64,7 @@ class PTPomodoroManager {
                 }
                 
                 self.currentTime.onNext(time)
+                self.timeCounter = time
                 return
             }
             
@@ -110,17 +113,28 @@ class PTPomodoroManager {
         
     }
     
-    private func pomodoroDidFinish() {
-        PTNotification.fireNotification()
-    }
-    
     private func startTimer() {
         timer.start()
     }
     
     private func stopTimer() {
+        if _timerStatus.value == .task {
+            let pomodoro = PTPomodoro(status: .stopped, time: timeCounter)
+            propagateNewPomodoro(pomodoro: pomodoro)
+        }
+        
         timer.stop()
         timer.reset()
+    }
+    
+    private func pomodoroDidFinish() {
+        let pomodoro = PTPomodoro(status: .finished, time: roundTime.value)
+        propagateNewPomodoro(pomodoro: pomodoro)
+    }
+    
+    private func propagateNewPomodoro(pomodoro: PTPomodoro) {
+        PTStorage.addPomodoro(pomodoro: pomodoro)
+        PTNotification.advertisePomodoro(pomodoro: pomodoro)
     }
     
     // MARK: - Internal methods
