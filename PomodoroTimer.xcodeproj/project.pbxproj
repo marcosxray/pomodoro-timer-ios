@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		09D02FBC1FE0387100B70334 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D02FBB1FE0387100B70334 /* Extensions.swift */; };
+		09D02FF91FE16F9E00B70334 /* PTHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D02FF81FE16F9E00B70334 /* PTHistoryViewModel.swift */; };
+		09D02FFB1FE16FBD00B70334 /* PTHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D02FFA1FE16FBD00B70334 /* PTHistoryViewController.swift */; };
+		09D02FFD1FE1727500B70334 /* PTHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D02FFC1FE1727500B70334 /* PTHistoryCell.swift */; };
 		63703F715D25185383694EFF /* Pods_PomodoroTimerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94962AB8F24A99ECEFAD8678 /* Pods_PomodoroTimerTests.framework */; };
 		8D113EA11FDFC01600F0488A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D113EA01FDFC01600F0488A /* AppDelegate.swift */; };
 		8D113EA61FDFC01600F0488A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D113EA41FDFC01600F0488A /* Main.storyboard */; };
@@ -46,6 +49,9 @@
 
 /* Begin PBXFileReference section */
 		09D02FBB1FE0387100B70334 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		09D02FF81FE16F9E00B70334 /* PTHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTHistoryViewModel.swift; sourceTree = "<group>"; };
+		09D02FFA1FE16FBD00B70334 /* PTHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTHistoryViewController.swift; sourceTree = "<group>"; };
+		09D02FFC1FE1727500B70334 /* PTHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTHistoryCell.swift; sourceTree = "<group>"; };
 		1C5014EDF79471D4A54D5704 /* Pods-PomodoroTimer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PomodoroTimer.release.xcconfig"; path = "Pods/Target Support Files/Pods-PomodoroTimer/Pods-PomodoroTimer.release.xcconfig"; sourceTree = "<group>"; };
 		2AB591845243E6103FD51932 /* Pods-PomodoroTimerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PomodoroTimerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PomodoroTimerTests/Pods-PomodoroTimerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8D113E9D1FDFC01600F0488A /* PomodoroTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoroTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +119,24 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		09D02FF71FE16F7D00B70334 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				09D02FF81FE16F9E00B70334 /* PTHistoryViewModel.swift */,
+				09D02FFA1FE16FBD00B70334 /* PTHistoryViewController.swift */,
+				09D02FFC1FE1727500B70334 /* PTHistoryCell.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		09D02FFE1FE1737E00B70334 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8D113EA01FDFC01600F0488A /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		850CD84AFB5B5501FDA686BC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,12 +175,12 @@
 		8D113E9F1FDFC01600F0488A /* PomodoroTimer */ = {
 			isa = PBXGroup;
 			children = (
+				09D02FFE1FE1737E00B70334 /* Application */,
 				8D113EDC1FDFCB8E00F0488A /* Model */,
 				8D113ECE1FDFC16C00F0488A /* Resources */,
 				8D113ECF1FDFC17300F0488A /* Managers */,
 				8D113ED11FDFC18500F0488A /* Features */,
 				09D02FBA1FE0385800B70334 /* Extensions */,
-				8D113EA01FDFC01600F0488A /* AppDelegate.swift */,
 				8D113EAC1FDFC01600F0488A /* Info.plist */,
 			);
 			path = PomodoroTimer;
@@ -215,6 +239,7 @@
 			children = (
 				8D113EA41FDFC01600F0488A /* Main.storyboard */,
 				8D113ED01FDFC17C00F0488A /* Home */,
+				09D02FF71FE16F7D00B70334 /* History */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -534,6 +559,7 @@
 			files = (
 				8D92255C1FE1120B00726CCB /* PTNotification.swift in Sources */,
 				8DBBE54F1FE12BE800D8C91E /* PTStorage.swift in Sources */,
+				09D02FFD1FE1727500B70334 /* PTHistoryCell.swift in Sources */,
 				8D113EDB1FDFC30300F0488A /* PTHomeViewController.swift in Sources */,
 				8D113ED71FDFC23C00F0488A /* PTConstants.swift in Sources */,
 				8D113EDE1FDFCBA100F0488A /* PTPomodoro.swift in Sources */,
@@ -541,7 +567,9 @@
 				8D113ED91FDFC2BB00F0488A /* PTHomeViewModel.swift in Sources */,
 				8D113ED31FDFC1D100F0488A /* PTTimer.swift in Sources */,
 				8D113ED51FDFC21400F0488A /* PTPomodoroManager.swift in Sources */,
+				09D02FFB1FE16FBD00B70334 /* PTHistoryViewController.swift in Sources */,
 				8D113EA11FDFC01600F0488A /* AppDelegate.swift in Sources */,
+				09D02FF91FE16F9E00B70334 /* PTHistoryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

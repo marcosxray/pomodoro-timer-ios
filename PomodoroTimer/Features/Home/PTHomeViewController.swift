@@ -47,6 +47,10 @@ class PTHomeViewController: UIViewController {
     }
     
     // MARK: - Private methods
+    private func setupVisuals() {
+        //
+    }
+    
     private func setupRx() {
         viewModel.currentTime.asObservable().bind(onNext: { value in
             self.timerLabel.text = value.secondsToFormattedTimeString() // "\(value)"

@@ -9,14 +9,24 @@
 import UIKit
 import AVFoundation
 
+// MARK: - Aliases
+let newPomodoroNotification = NSNotification.Name(rawValue: PTConstants.NOTIFICATION_KEY)
+
 struct PTNotification {
     
+    // MARK: - Internal methods
     static func advertisePomodoro(pomodoro: PTPomodoro) {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.post(name: NSNotification.Name(rawValue: PTConstants.NOTIFICATION_KEY), object: nil)
-        
+        NotificationCenter.default.post(Notification(name: newPomodoroNotification))
         PTNotification.playSound()
         PTNotification.fireLocalNotification()
+    }
+    
+    static func registerForPomodoroNewNotification(object: AnyObject, using: @escaping (Notification) -> Void ) {
+        NotificationCenter.default.addObserver(forName: newPomodoroNotification, object: nil, queue: OperationQueue.main, using: using)
+    }
+    
+    static func unregisterForNewPomodoroNotification(object: AnyObject) {
+        NotificationCenter.default.removeObserver(object)
     }
     
     static func fireLocalNotification() {
