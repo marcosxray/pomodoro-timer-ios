@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class PTHistoryViewController: UIViewController {
+class PTHistoryViewController: BaseViewController {
     
     // MARK: - Private variables
     private let viewModel = PTHistoryViewModel()

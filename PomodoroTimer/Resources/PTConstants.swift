@@ -8,7 +8,7 @@
 
 struct PTConstants {
     
-    static let initialRoundTime = 8 // * 60
+    static let initialTaskTime = 8 // * 60
     static let initialRestTime = 3 // * 60
     static let initialLongRestTime = 5 // * 60
     static let pomodoroRounds = 4

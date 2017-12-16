@@ -19,13 +19,13 @@ enum TimerStatus {
 class PTPomodoroManager {
     
     // MARK: - Internal variables
-    var currentTime = BehaviorSubject<Int>(value: PTConstants.initialRoundTime)
+    var currentTime = BehaviorSubject<Int>(value: PTConstants.initialTaskTime)
     var timerStatus = BehaviorSubject<TimerStatus>(value: .none)
     
-    var roundTime = Variable<Int>(PTConstants.initialRoundTime)
+    var taskTime = Variable<Int>(PTConstants.initialTaskTime)
     var restTime = Variable<Int>(PTConstants.initialRestTime)
     var longRestTime = Variable<Int>(PTConstants.initialLongRestTime)
-    var roundCounter = Variable<Int>(0)
+    var taskCounter = Variable<Int>(0)
     var _timerStatus = Variable<TimerStatus>(.none)
     
     var disposeBag = DisposeBag()
@@ -54,14 +54,14 @@ class PTPomodoroManager {
                 
                 switch self._timerStatus.value {
                 case .task:
-                    time = self.roundTime.value - value
+                    time = self.taskTime.value - value
                     self.runningTaskTime = value
                 case .rest:
                     time = self.restTime.value - value
                 case .longRest:
                     time = self.longRestTime.value - value
                 case .none:
-                    time = self.roundTime.value
+                    time = self.taskTime.value
                 }
                 
                 self.currentTime.onNext(time)
@@ -76,11 +76,11 @@ class PTPomodoroManager {
             switch self._timerStatus.value {
                 
             case .task:
-                if self.roundCounter.value < PTConstants.pomodoroRounds {
+                if self.taskCounter.value < PTConstants.pomodoroRounds {
                     self._timerStatus.value = .rest
                 } else {
                     self._timerStatus.value = .longRest
-                    self.roundCounter.value = 0
+                    self.taskCounter.value = 0
                 }
                 
                 self.pomodoroDidFinish()
@@ -89,7 +89,7 @@ class PTPomodoroManager {
                 self._timerStatus.value = .task
                 
             default:
-                self.roundCounter.value = 0
+                self.taskCounter.value = 0
             }
             
         }).disposed(by: disposeBag)
@@ -100,12 +100,12 @@ class PTPomodoroManager {
             if state != .none {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     self.startTimer()
-                    if state == .task { self.roundCounter.value += 1 }
+                    if state == .task { self.taskCounter.value += 1 }
                 }
             } else {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                    self.roundCounter.value = 0
-                    self.currentTime.onNext(self.roundTime.value)
+                    self.taskCounter.value = 0
+                    self.currentTime.onNext(self.taskTime.value)
                     self.stopTimer()
                 }
             }
@@ -123,7 +123,7 @@ class PTPomodoroManager {
     }
     
     private func pomodoroDidFinish() {
-        let pomodoro = PTPomodoro(status: .finished, time: roundTime.value)
+        let pomodoro = PTPomodoro(status: .finished, time: taskTime.value)
         propagateNewPomodoro(pomodoro: pomodoro)
     }
     

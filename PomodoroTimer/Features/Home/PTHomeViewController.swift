@@ -10,9 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class PTHomeViewController: UIViewController {
-    
-    // MARK: Internal variables
+class PTHomeViewController: BaseViewController {
     
     // MARK: - Private variables
     private let viewModel = PTHomeViewModel()
@@ -23,7 +21,7 @@ class PTHomeViewController: UIViewController {
     @IBOutlet weak var roundCounterLabel: UILabel!
     
     @IBOutlet weak var playStopButton: PTButton!
-    @IBOutlet weak var roundTimeButton: UIButton!
+    @IBOutlet weak var taskTimeButton: UIButton!
     @IBOutlet weak var restTimeButton: UIButton!
     @IBOutlet weak var longRestTimeButton: UIButton!
     
@@ -56,7 +54,7 @@ class PTHomeViewController: UIViewController {
         
         for value in viewModel.taskOptions {
             alert.addAction(UIAlertAction(title: value.secondsToFormattedTimeString(), style: .default, handler: { (action) in
-                self.viewModel.updateRoundTime(roundTime: value)
+                self.viewModel.updateTaskTime(taskTime: value)
             }))
         }
         
@@ -93,8 +91,8 @@ class PTHomeViewController: UIViewController {
             self.timerLabel.text = value.secondsToFormattedTimeString()
         }).disposed(by: disposeBag)
 
-        viewModel.roundTime.asObserver().bind(onNext: { value in
-            self.roundTimeButton.setTitle(value.secondsToFormattedTimeString(), for: .normal)
+        viewModel.taskTime.asObserver().bind(onNext: { value in
+            self.taskTimeButton.setTitle(value.secondsToFormattedTimeString(), for: .normal)
         }).disposed(by: disposeBag)
         
         viewModel.restTime.asObserver().bind(onNext: { value in
@@ -105,7 +103,7 @@ class PTHomeViewController: UIViewController {
             self.longRestTimeButton.setTitle(value.secondsToFormattedTimeString(), for: .normal)
         }).disposed(by: disposeBag)
         
-        viewModel.roundCounter.asObserver().bind(onNext: { value in
+        viewModel.taskCounter.asObserver().bind(onNext: { value in
             self.roundCounterLabel.text = "\(value)"
             self.roundDisplay.isHidden = value > 0 ? false : true
         }).disposed(by: disposeBag)

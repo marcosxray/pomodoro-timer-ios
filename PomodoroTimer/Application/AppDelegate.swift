@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(notificationSettings)
         
         application.isIdleTimerDisabled = true
+        configureGlobalLayout()
         
         return true
     }
@@ -45,7 +46,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    // MARK: - General visual adjustments
 
-
+    func configureGlobalLayout() {
+        UINavigationBar.appearance().barTintColor = UIColor.firstColor
+        UINavigationBar.appearance().tintColor = UIColor.secondColor
+        UINavigationBar.appearance().titleTextAttributes = [ NSAttributedStringKey.foregroundColor: UIColor.secondColor ]
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
 }
 
