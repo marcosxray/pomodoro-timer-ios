@@ -22,7 +22,7 @@ class PTHomeViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var roundCounterLabel: UILabel!
     
-    @IBOutlet weak var playStopButton: UIButton!
+    @IBOutlet weak var playStopButton: PTButton!
     @IBOutlet weak var roundTimeButton: UIButton!
     @IBOutlet weak var restTimeButton: UIButton!
     @IBOutlet weak var longRestTimeButton: UIButton!
@@ -31,10 +31,13 @@ class PTHomeViewController: UIViewController {
     @IBOutlet weak var restDisplay: UIView!
     @IBOutlet weak var longRestDisplay: UIView!
     @IBOutlet weak var roundDisplay: UIView!
+    @IBOutlet weak var configButtonsDisplay: UIView!
     
     // MARK: - Overridden methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = PTConstants.Titles.home
         setupRx()
         changePlayStopButton(playing: false)
     }
@@ -46,6 +49,42 @@ class PTHomeViewController: UIViewController {
     
     @IBAction private func stopDidTouch() {
         viewModel.stopTimer()
+    }
+    
+    @IBAction func taskButtonDidTouch(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Task Time", message: "Please Choose an Option", preferredStyle: .actionSheet)
+        
+        for value in viewModel.taskOptions {
+            alert.addAction(UIAlertAction(title: value.secondsToFormattedTimeString(), style: .default, handler: { (action) in
+                self.viewModel.updateRoundTime(roundTime: value)
+            }))
+        }
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func restButtonDidTouch(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Rest Time", message: "Please Choose an Option", preferredStyle: .actionSheet)
+        
+        for value in viewModel.restOptions {
+            alert.addAction(UIAlertAction(title: value.secondsToFormattedTimeString(), style: .default, handler: { (action) in
+                self.viewModel.updateRestTime(restTime: value)
+            }))
+        }
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func longRestButtonDidTouch(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Long Rest Time", message: "Please Choose an Option", preferredStyle: .actionSheet)
+        
+        for value in viewModel.longRestOptions {
+            alert.addAction(UIAlertAction(title: value.secondsToFormattedTimeString(), style: .default, handler: { (action) in
+                self.viewModel.updateLongRestTime(restTime: value)
+            }))
+        }
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: - Private methods
@@ -75,20 +114,22 @@ class PTHomeViewController: UIViewController {
             
             switch status {
             case .none:
-                self.updateDisplayLabels()
+                self.updateDisplays()
                 self.changePlayStopButton(playing: false)
+                self.configButtonsDisplay.isUserInteractionEnabled = true
+                self.configButtonsDisplay.alpha = 1
             case .task:
-                self.updateDisplayLabels()
+                self.updateDisplays()
                 self.changePlayStopButton(playing: true)
                 self.taskDisplay.isUserInteractionEnabled = true
                 self.taskDisplay.alpha = 1
             case .rest:
-                self.updateDisplayLabels()
+                self.updateDisplays()
                 self.changePlayStopButton(playing: true)
                 self.restDisplay.isUserInteractionEnabled = true
                 self.restDisplay.alpha = 1
             case .longRest:
-                self.updateDisplayLabels()
+                self.updateDisplays()
                 self.changePlayStopButton(playing: true)
                 self.longRestDisplay.isUserInteractionEnabled = true
                 self.longRestDisplay.alpha = 1
@@ -96,24 +137,36 @@ class PTHomeViewController: UIViewController {
         }).disposed(by: disposeBag)
     }
     
-    private func updateDisplayLabels() {
-        taskDisplay.alpha = 0.3
-        restDisplay.alpha = 0.3
-        longRestDisplay.alpha = 0.3
+    private func updateDisplays() {
+        taskDisplay.alpha = 0
+        restDisplay.alpha = 0
+        longRestDisplay.alpha = 0
+        configButtonsDisplay.alpha = 0.3
         
         taskDisplay.isUserInteractionEnabled = false
         restDisplay.isUserInteractionEnabled = false
         longRestDisplay.isUserInteractionEnabled = false
+        configButtonsDisplay.isUserInteractionEnabled = false
     }
     
     private func changePlayStopButton(playing: Bool) {
         if playing {
             playStopButton.setTitle("STOP", for: .normal)
+            playStopButton.borderWidth = 2
+            playStopButton.borderColor = UIColor.secondColor
+            playStopButton.setTitleColor(UIColor.secondColor, for: .normal)
+            playStopButton.backgroundColor = UIColor.clear
+            
             playStopButton.removeTarget(self, action: #selector(PTHomeViewController.startDidTouch), for: .touchUpInside)
             playStopButton.addTarget(self, action: #selector(PTHomeViewController.stopDidTouch), for: .touchUpInside)
             
         } else {
             playStopButton.setTitle("PLAY", for: .normal)
+            playStopButton.borderWidth = 0
+            playStopButton.borderColor = UIColor.clear
+            playStopButton.setTitleColor(UIColor.firstColor, for: .normal)
+            playStopButton.backgroundColor = UIColor.secondColor
+            
             playStopButton.removeTarget(self, action: #selector(PTHomeViewController.stopDidTouch), for: .touchUpInside)
             playStopButton.addTarget(self, action: #selector(PTHomeViewController.startDidTouch), for: .touchUpInside)
         }

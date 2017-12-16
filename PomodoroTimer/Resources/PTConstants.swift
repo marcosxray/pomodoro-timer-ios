@@ -14,4 +14,15 @@ struct PTConstants {
     static let pomodoroRounds = 4
     
     static let NOTIFICATION_KEY = "NewPomodoroNotification"
+    
+    struct NibNames {
+        static let sectionHeader = "PTSectionHeaderView"
+    }
+    
+    struct Titles {
+        static let home = "Pomodoro"
+        static let history = "History"
+        static let today = "TODAY"
+        static let yesterday = "YESTERDAY"
+    }
 }

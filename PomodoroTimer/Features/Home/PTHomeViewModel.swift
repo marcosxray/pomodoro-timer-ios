@@ -19,6 +19,22 @@ class PTHomeViewModel {
     var roundCounter = BehaviorSubject<Int>(value: 0)
     var timerStatus = BehaviorSubject<TimerStatus>(value: .none)
     
+    let taskOptions = [20 * 60,
+                       25 * 60,
+                       30 * 60,
+                       35 * 60,
+                       40 * 60,
+                       45 * 60]
+    
+    let restOptions = [3 * 60,
+                       4 * 60,
+                       5 * 60]
+    
+    let longRestOptions = [15 * 60,
+                           20 * 60,
+                           25 * 60,
+                           30 * 60]
+    
     // MARK: - Private variables
     private let pomodoroManager = PTPomodoroManager()
     private var disposeBag = DisposeBag()

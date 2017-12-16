@@ -25,9 +25,9 @@ class PTHistoryCell: UITableViewCell {
     
     // MARK: Internal Methods
     func configureLayout(pomodoro: PTPomodoro) {
-
-        timeLabel.text = pomodoro.time.secondsToFormattedTimeString()
         statusLabel.text = "\(pomodoro.status)"
         dateLabel.text = pomodoro.date.formattedTime()
+        timeLabel.text = pomodoro.time.secondsToFormattedTimeString()
+        timeLabel.textColor = pomodoro.status == .finished ? UIColor.firstColor : UIColor.fourthColor
     }
 }

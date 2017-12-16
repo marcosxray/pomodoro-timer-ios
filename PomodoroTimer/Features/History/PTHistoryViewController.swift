@@ -22,6 +22,7 @@ class PTHistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = PTConstants.Titles.history
         self.tableView.reloadData()
         setupVisuals()
         setupRx()
@@ -50,26 +51,38 @@ extension PTHistoryViewController: UITableViewDataSource {
         return viewModel.dataSource.value[section].count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerCell = tableView.dequeueReusableCell(withIdentifier: PTSectionHeaderCell.reuseIdentifier) as? PTSectionHeaderCell else {
+            return UITableViewCell()
+        }
+        
         let title = self.viewModel.dataSourceKeys[section]
+        var sectionTitle = ""
         
-        print("\(Date()), \(title)")
-        
-        
-        if title == Date().formattedDate() { return "TODAY" }
-        if title == Date().yesterday.formattedDate() { return "YESTERDAY" }
-        return self.viewModel.dataSourceKeys[section]
+        switch title {
+        case Date().formattedDate():
+            sectionTitle = PTConstants.Titles.today
+        case Date().yesterday.formattedDate():
+            sectionTitle = PTConstants.Titles.yesterday
+        default:
+            sectionTitle = self.viewModel.dataSourceKeys[section]
+        }
+
+        headerCell.sectionTitleLabel.text = sectionTitle
+        return headerCell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PTHistoryCell.reuseIdentifier, for: indexPath) as? PTHistoryCell else {
             return UITableViewCell()
         }
         
         let pomodoro = viewModel.dataSource.value[indexPath.section][indexPath.row]
         cell.configureLayout(pomodoro: pomodoro)
-        
         return cell
     }
 }

@@ -42,19 +42,19 @@ extension Date {
 
 extension UIColor {
     
-    var firstColor: UIColor {
+    static var firstColor: UIColor {
         return UIColor(red: 180/255.0, green: 0, blue: 0, alpha: 1)
     }
     
-    var secondColor: UIColor {
+    static var secondColor: UIColor {
         return UIColor.white
     }
     
-    var thirdColor: UIColor {
+    static var thirdColor: UIColor {
         return UIColor(white: 0.3, alpha: 1)
     }
     
-    var fourthColor: UIColor {
+    static var fourthColor: UIColor {
         return UIColor(white: 0.6, alpha: 1)
     }
 }
