@@ -20,15 +20,17 @@ class PTHomeViewController: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var timerLabel: UILabel!
-    @IBOutlet weak var roundTimeLabel: UILabel!
-    @IBOutlet weak var restTimeLabel: UILabel!
-    @IBOutlet weak var longRestTimeLabel: UILabel!
     @IBOutlet weak var roundCounterLabel: UILabel!
-    @IBOutlet weak var playStopButton: UIButton!
     
-    @IBOutlet weak var taskDisplayLabel: UILabel!
-    @IBOutlet weak var restDisplayLabel: UILabel!
-    @IBOutlet weak var longRestDisplayLabel: UILabel!
+    @IBOutlet weak var playStopButton: UIButton!
+    @IBOutlet weak var roundTimeButton: UIButton!
+    @IBOutlet weak var restTimeButton: UIButton!
+    @IBOutlet weak var longRestTimeButton: UIButton!
+    
+    @IBOutlet weak var taskDisplay: UIView!
+    @IBOutlet weak var restDisplay: UIView!
+    @IBOutlet weak var longRestDisplay: UIView!
+    @IBOutlet weak var roundDisplay: UIView!
     
     // MARK: - Overridden methods
     override func viewDidLoad() {
@@ -47,29 +49,26 @@ class PTHomeViewController: UIViewController {
     }
     
     // MARK: - Private methods
-    private func setupVisuals() {
-        //
-    }
-    
     private func setupRx() {
         viewModel.currentTime.asObservable().bind(onNext: { value in
-            self.timerLabel.text = value.secondsToFormattedTimeString() // "\(value)"
+            self.timerLabel.text = value.secondsToFormattedTimeString()
         }).disposed(by: disposeBag)
-        
+
         viewModel.roundTime.asObserver().bind(onNext: { value in
-            self.roundTimeLabel.text = value.secondsToFormattedTimeString() // "\(value)"
+            self.roundTimeButton.setTitle(value.secondsToFormattedTimeString(), for: .normal)
         }).disposed(by: disposeBag)
         
         viewModel.restTime.asObserver().bind(onNext: { value in
-            self.restTimeLabel.text = value.secondsToFormattedTimeString() // "\(value)"
+            self.restTimeButton.setTitle(value.secondsToFormattedTimeString(), for: .normal)
         }).disposed(by: disposeBag)
         
         viewModel.longRestTime.asObserver().bind(onNext: { value in
-            self.longRestTimeLabel.text = value.secondsToFormattedTimeString() // "\(value)"
+            self.longRestTimeButton.setTitle(value.secondsToFormattedTimeString(), for: .normal)
         }).disposed(by: disposeBag)
         
         viewModel.roundCounter.asObserver().bind(onNext: { value in
             self.roundCounterLabel.text = "\(value)"
+            self.roundDisplay.isHidden = value > 0 ? false : true
         }).disposed(by: disposeBag)
         
         viewModel.timerStatus.asObservable().bind(onNext: { status in
@@ -81,40 +80,40 @@ class PTHomeViewController: UIViewController {
             case .task:
                 self.updateDisplayLabels()
                 self.changePlayStopButton(playing: true)
-                self.taskDisplayLabel.isUserInteractionEnabled = true
-                self.taskDisplayLabel.alpha = 1
+                self.taskDisplay.isUserInteractionEnabled = true
+                self.taskDisplay.alpha = 1
             case .rest:
                 self.updateDisplayLabels()
                 self.changePlayStopButton(playing: true)
-                self.restDisplayLabel.isUserInteractionEnabled = true
-                self.restDisplayLabel.alpha = 1
+                self.restDisplay.isUserInteractionEnabled = true
+                self.restDisplay.alpha = 1
             case .longRest:
                 self.updateDisplayLabels()
                 self.changePlayStopButton(playing: true)
-                self.longRestDisplayLabel.isUserInteractionEnabled = true
-                self.longRestDisplayLabel.alpha = 1
+                self.longRestDisplay.isUserInteractionEnabled = true
+                self.longRestDisplay.alpha = 1
             }
         }).disposed(by: disposeBag)
     }
     
     private func updateDisplayLabels() {
-        taskDisplayLabel.alpha = 0.3
-        restDisplayLabel.alpha = 0.3
-        longRestDisplayLabel.alpha = 0.3
+        taskDisplay.alpha = 0.3
+        restDisplay.alpha = 0.3
+        longRestDisplay.alpha = 0.3
         
-        taskDisplayLabel.isUserInteractionEnabled = false
-        restDisplayLabel.isUserInteractionEnabled = false
-        longRestDisplayLabel.isUserInteractionEnabled = false
+        taskDisplay.isUserInteractionEnabled = false
+        restDisplay.isUserInteractionEnabled = false
+        longRestDisplay.isUserInteractionEnabled = false
     }
     
     private func changePlayStopButton(playing: Bool) {
         if playing {
-            playStopButton.setTitle("Stop", for: .normal)
+            playStopButton.setTitle("STOP", for: .normal)
             playStopButton.removeTarget(self, action: #selector(PTHomeViewController.startDidTouch), for: .touchUpInside)
             playStopButton.addTarget(self, action: #selector(PTHomeViewController.stopDidTouch), for: .touchUpInside)
             
         } else {
-            playStopButton.setTitle("Play", for: .normal)
+            playStopButton.setTitle("PLAY", for: .normal)
             playStopButton.removeTarget(self, action: #selector(PTHomeViewController.stopDidTouch), for: .touchUpInside)
             playStopButton.addTarget(self, action: #selector(PTHomeViewController.startDidTouch), for: .touchUpInside)
         }

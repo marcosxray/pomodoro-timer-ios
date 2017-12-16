@@ -53,3 +53,14 @@ extension PTPomodoro: NSCoding {
     }
 }
 
+extension PTPomodoro {
+    
+    static func ==(lhs: PTPomodoro, rhs: PTPomodoro) -> Bool {
+        return lhs.date.formattedDate() == rhs.date.formattedDate()
+    }
+    
+    static func <(lhs: PTPomodoro, rhs: PTPomodoro) -> Bool {
+        return lhs.date.formattedDate() < rhs.date.formattedDate()
+    }
+}
+

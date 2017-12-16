@@ -12,7 +12,8 @@ import RxSwift
 class PTHistoryViewModel {
     
     // MARK: - Internal variables
-    var dataSource = Variable<[PTPomodoro]>([])
+    var dataSource = Variable<[[PTPomodoro]]>([])
+    var dataSourceKeys: [String] = []
     
     // MARK: Initialization
     init() {
@@ -29,6 +30,33 @@ class PTHistoryViewModel {
     
     // MARK: - Private methods
     private func updateData() {
-        self.dataSource.value = PTStorage.getAllPomodoros()
+        
+        let allPomodoros = PTStorage.getAllPomodoros()
+        
+        var groups:[String: [PTPomodoro]] = [:]
+        for pomodoro in allPomodoros {
+            
+            let key = pomodoro.date.formattedDate()
+            
+            if let _ = groups[key] {
+                groups[key]?.append(pomodoro)
+            } else {
+                let group = [pomodoro]
+                groups[key] = group
+            }
+        }
+        
+        var keysArray = groups.keys.map({ return $0 })
+        keysArray = keysArray.sorted(by: { $0 > $1 })
+        
+        var orderedPomodorosGroups: [[PTPomodoro]] = []
+        for key in keysArray {
+            if let pomodoros = groups[key] {
+                orderedPomodorosGroups.append(pomodoros)
+            }
+        }
+
+        self.dataSourceKeys = keysArray
+        self.dataSource.value = orderedPomodorosGroups
     }
 }
