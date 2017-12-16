@@ -27,6 +27,7 @@
 		8D2CC14A1FE4649300A4964B /* PTButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2CC1491FE4649300A4964B /* PTButton.swift */; };
 		8D2CC1541FE5606900A4964B /* PTSectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2CC1531FE5606900A4964B /* PTSectionHeaderCell.swift */; };
 		8D2CC1571FE576B200A4964B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2CC1561FE576B200A4964B /* BaseViewController.swift */; };
+		8D2CC1591FE5827000A4964B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2CC1581FE5827000A4964B /* MainTabBarController.swift */; };
 		8D92255C1FE1120B00726CCB /* PTNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D92255B1FE1120B00726CCB /* PTNotification.swift */; };
 		8DBBE54F1FE12BE800D8C91E /* PTStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBBE54E1FE12BE800D8C91E /* PTStorage.swift */; };
 		CE85D3A5DD5728587CA0DF14 /* Pods_PomodoroTimerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7187B7A99C7B3343E341133 /* Pods_PomodoroTimerUITests.framework */; };
@@ -78,6 +79,7 @@
 		8D2CC1491FE4649300A4964B /* PTButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTButton.swift; sourceTree = "<group>"; };
 		8D2CC1531FE5606900A4964B /* PTSectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTSectionHeaderCell.swift; sourceTree = "<group>"; };
 		8D2CC1561FE576B200A4964B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		8D2CC1581FE5827000A4964B /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		8D92255B1FE1120B00726CCB /* PTNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTNotification.swift; sourceTree = "<group>"; };
 		8DBBE54E1FE12BE800D8C91E /* PTStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTStorage.swift; sourceTree = "<group>"; };
 		94962AB8F24A99ECEFAD8678 /* Pods_PomodoroTimerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PomodoroTimerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -247,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				8D113EA41FDFC01600F0488A /* Main.storyboard */,
+				8D2CC1581FE5827000A4964B /* MainTabBarController.swift */,
 				8D113ED01FDFC17C00F0488A /* Home */,
 				09D02FF71FE16F7D00B70334 /* History */,
 			);
@@ -590,6 +593,7 @@
 				8D2CC1571FE576B200A4964B /* BaseViewController.swift in Sources */,
 				09D02FF91FE16F9E00B70334 /* PTHistoryViewModel.swift in Sources */,
 				8D2CC14A1FE4649300A4964B /* PTButton.swift in Sources */,
+				8D2CC1591FE5827000A4964B /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

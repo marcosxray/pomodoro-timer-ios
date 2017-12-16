@@ -46,27 +46,27 @@ class PTHomeViewModel {
     
     // MARK: - Private methods
     private func setupRx() {
-        pomodoroManager.currentTime.asObservable().subscribe(onNext: { value in
+        pomodoroManager.currentTime.asObservable().subscribe(onNext: { [unowned self] value in
             self.currentTime.onNext(value)
         }).disposed(by: disposeBag)
         
-        pomodoroManager.taskTime.asObservable().subscribe(onNext: { value in
+        pomodoroManager.taskTime.asObservable().subscribe(onNext: { [unowned self] value in
             self.taskTime.onNext(value)
         }).disposed(by: disposeBag)
         
-        pomodoroManager.restTime.asObservable().subscribe(onNext: { value in
+        pomodoroManager.restTime.asObservable().subscribe(onNext: { [unowned self] value in
             self.restTime.onNext(value)
         }).disposed(by: disposeBag)
         
-        pomodoroManager.longRestTime.asObservable().subscribe(onNext: { value in
+        pomodoroManager.longRestTime.asObservable().subscribe(onNext: { [unowned self] value in
             self.longRestTime.onNext(value)
         }).disposed(by: disposeBag)
         
-        pomodoroManager.taskCounter.asObservable().subscribe(onNext: { value in
+        pomodoroManager.taskCounter.asObservable().subscribe(onNext: { [unowned self] value in
             self.taskCounter.onNext(value)
         }).disposed(by: disposeBag)
         
-        pomodoroManager.timerStatus.asObservable().subscribe(onNext: { state in
+        pomodoroManager.timerStatus.asObservable().subscribe(onNext: { [unowned self] state in
             self.timerStatus.onNext(state)
         }).disposed(by: disposeBag)
     }

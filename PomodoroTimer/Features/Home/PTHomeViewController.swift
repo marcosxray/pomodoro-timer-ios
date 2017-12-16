@@ -55,6 +55,7 @@ class PTHomeViewController: BaseViewController {
         for value in viewModel.taskOptions {
             alert.addAction(UIAlertAction(title: value.secondsToFormattedTimeString(), style: .default, handler: { (action) in
                 self.viewModel.updateTaskTime(taskTime: value)
+                self.timerLabel.text = value.secondsToFormattedTimeString()
             }))
         }
         

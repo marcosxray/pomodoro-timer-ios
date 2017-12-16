@@ -316,7 +316,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MOF-97-dDP">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" rowHeight="80" id="Rdv-0K-92H" customClass="PTHistoryCell" customModule="PomodoroTimer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
@@ -393,7 +393,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="MOF-97-dDP" firstAttribute="width" secondItem="hvj-eE-aJY" secondAttribute="width" id="3j0-3v-S3C"/>
                             <constraint firstItem="MOF-97-dDP" firstAttribute="centerX" secondItem="hvj-eE-aJY" secondAttribute="centerX" id="NY6-x8-NNs"/>
@@ -410,10 +410,10 @@
             </objects>
             <point key="canvasLocation" x="733.60000000000002" y="972.86356821589209"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="vxo-L7-ndc">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="eBH-un-TUS" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="eBH-un-TUS" customClass="MainTabBarController" customModule="PomodoroTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="3N1-9v-Wvg">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

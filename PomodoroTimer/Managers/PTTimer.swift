@@ -22,7 +22,7 @@ class PTTimer {
     
     // MARK: - Initialization methods
     private init() {
-        _currentTime.asObservable().subscribe(onNext: { value in
+        _currentTime.asObservable().subscribe(onNext: { [unowned self] value in
             self.currentTime.onNext(value)
         }).disposed(by: disposeBag)
     }

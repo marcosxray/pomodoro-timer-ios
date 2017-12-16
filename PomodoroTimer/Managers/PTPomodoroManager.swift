@@ -43,11 +43,11 @@ class PTPomodoroManager {
     // MARK: - Private methods
     private func setupRx() {
         
-        _timerStatus.asObservable().subscribe(onNext: { value in
+        _timerStatus.asObservable().subscribe(onNext: { [unowned self] value in
             self.timerStatus.onNext(value)
         }).disposed(by: disposeBag)
         
-        timer.currentTime.asObserver().subscribe(onNext: { value in
+        timer.currentTime.asObserver().subscribe(onNext: { [unowned self] value in
             
             guard value == 0 else {
                 var time: Int = 0
@@ -71,7 +71,7 @@ class PTPomodoroManager {
         }).disposed(by: disposeBag)
         
         
-        self.currentTime.asObserver().filter({ $0 == 0 }).subscribe(onNext: { _ in
+        self.currentTime.asObserver().filter({ $0 == 0 }).subscribe(onNext: { [unowned self] _ in
 
             switch self._timerStatus.value {
                 
@@ -95,7 +95,7 @@ class PTPomodoroManager {
         }).disposed(by: disposeBag)
         
         
-        self._timerStatus.asObservable().subscribe(onNext: { state in
+        self._timerStatus.asObservable().subscribe(onNext: { [unowned self] state in
             
             if state != .none {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {

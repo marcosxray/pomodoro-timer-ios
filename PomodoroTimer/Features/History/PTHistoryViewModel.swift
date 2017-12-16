@@ -18,7 +18,7 @@ class PTHistoryViewModel {
     // MARK: Initialization
     init() {
         self.updateData()
-        PTNotification.registerForPomodoroNewNotification(object: self, using: { notification in
+        PTNotification.registerForPomodoroNewNotification(object: self, using: { [unowned self] notification in
             self.updateData()
         })
     }
