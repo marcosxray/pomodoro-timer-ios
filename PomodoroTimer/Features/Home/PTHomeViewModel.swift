@@ -46,28 +46,28 @@ class PTHomeViewModel {
     
     // MARK: - Private methods
     private func setupRx() {
-        pomodoroManager.currentTime.asObservable().subscribe(onNext: { [unowned self] value in
-            self.currentTime.onNext(value)
+        pomodoroManager.currentTime.asObservable().subscribe(onNext: { [weak self] value in
+            self?.currentTime.onNext(value)
         }).disposed(by: disposeBag)
         
-        pomodoroManager.taskTime.asObservable().subscribe(onNext: { [unowned self] value in
-            self.taskTime.onNext(value)
+        pomodoroManager.taskTime.asObservable().subscribe(onNext: { [weak self] value in
+            self?.taskTime.onNext(value)
         }).disposed(by: disposeBag)
         
-        pomodoroManager.restTime.asObservable().subscribe(onNext: { [unowned self] value in
-            self.restTime.onNext(value)
+        pomodoroManager.restTime.asObservable().subscribe(onNext: { [weak self] value in
+            self?.restTime.onNext(value)
         }).disposed(by: disposeBag)
         
-        pomodoroManager.longRestTime.asObservable().subscribe(onNext: { [unowned self] value in
-            self.longRestTime.onNext(value)
+        pomodoroManager.longRestTime.asObservable().subscribe(onNext: { [weak self] value in
+            self?.longRestTime.onNext(value)
         }).disposed(by: disposeBag)
         
-        pomodoroManager.roundCounter.asObservable().subscribe(onNext: { [unowned self] value in
-            self.roundCounter.onNext(value)
+        pomodoroManager.roundCounter.asObservable().subscribe(onNext: { [weak self] value in
+            self?.roundCounter.onNext(value)
         }).disposed(by: disposeBag)
         
-        pomodoroManager.timerStatus.asObservable().subscribe(onNext: { [unowned self] state in
-            self.timerStatus.onNext(state)
+        pomodoroManager.timerStatus.asObservable().subscribe(onNext: { [weak self] state in
+            self?.timerStatus.onNext(state)
         }).disposed(by: disposeBag)
     }
     

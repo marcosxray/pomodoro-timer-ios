@@ -48,67 +48,73 @@ class PTPomodoroManager {
     // MARK: - Private methods
     private func setupRx() {
         
-        _timerStatus.asObservable().subscribe(onNext: { [unowned self] value in
-            self.timerStatus.onNext(value)
+        _timerStatus.asObservable().subscribe(onNext: { [weak self] value in
+            self?.timerStatus.onNext(value)
         }).disposed(by: disposeBag)
         
-        timer.currentTime.asObserver().subscribe(onNext: { [unowned self] value in
+        timer.currentTime.asObserver().subscribe(onNext: { [weak self] value in
             
-            guard value == 0 else {
-                var time: Int = 0
+            if let existingSelf = self {
+                guard value == 0 else {
+                    var time: Int = 0
+                    
+                    switch existingSelf._timerStatus.value {
+                    case .task:
+                        time = existingSelf.taskTime.value - value
+                        existingSelf.runningTaskTime = value
+                    case .rest:
+                        time = existingSelf.restTime.value - value
+                    case .longRest:
+                        time = existingSelf.longRestTime.value - value
+                    case .none:
+                        time = existingSelf.taskTime.value
+                    }
+                    
+                    existingSelf.currentTime.onNext(time)
+                    return
+                }
+            }
+        }).disposed(by: disposeBag)
+        
+        
+        self.currentTime.asObserver().filter({ $0 == 0 }).subscribe(onNext: { [weak self] _ in
+
+            if let existingSelf = self {
                 
-                switch self._timerStatus.value {
+                switch existingSelf._timerStatus.value {
                 case .task:
-                    time = self.taskTime.value - value
-                    self.runningTaskTime = value
-                case .rest:
-                    time = self.restTime.value - value
-                case .longRest:
-                    time = self.longRestTime.value - value
-                case .none:
-                    time = self.taskTime.value
+                    if existingSelf.roundCounter.value < PTConstants.pomodoroRounds {
+                        existingSelf._timerStatus.value = .rest
+                    } else {
+                        existingSelf._timerStatus.value = .longRest
+                        existingSelf.roundCounter.value = 0
+                    }
+                    
+                    existingSelf.pomodoroDidFinish()
+                    
+                case .rest, .longRest:
+                    existingSelf._timerStatus.value = .task
+                    
+                default:
+                    existingSelf.roundCounter.value = 0
                 }
-                
-                self.currentTime.onNext(time)
-                return
             }
-            
+
         }).disposed(by: disposeBag)
-        
-        
-        self.currentTime.asObserver().filter({ $0 == 0 }).subscribe(onNext: { [unowned self] _ in
 
-            switch self._timerStatus.value {
 
-            case .task:
-                if self.roundCounter.value < PTConstants.pomodoroRounds {
-                    self._timerStatus.value = .rest
+        self._timerStatus.asObservable().observeOn(MainScheduler.asyncInstance).subscribe(onNext: { [weak self] state in
+
+            if let existingSelf = self {
+                if state != .none {
+                    existingSelf.startTimer()
+                    if state == .task { existingSelf.roundCounter.value += 1 }
                 } else {
-                    self._timerStatus.value = .longRest
-                    self.roundCounter.value = 0
+                    
+                    existingSelf.roundCounter.value = 0
+                    existingSelf.currentTime.onNext(existingSelf.taskTime.value)
+                    existingSelf.stopTimer()
                 }
-
-                self.pomodoroDidFinish()
-
-            case .rest, .longRest:
-                self._timerStatus.value = .task
-
-            default:
-                self.roundCounter.value = 0
-            }
-
-        }).disposed(by: disposeBag)
-
-
-        self._timerStatus.asObservable().observeOn(MainScheduler.asyncInstance).subscribe(onNext: { [unowned self] state in
-
-            if state != .none {
-                    self.startTimer()
-                    if state == .task { self.roundCounter.value += 1 }
-            } else {
-                    self.roundCounter.value = 0
-                    self.currentTime.onNext(self.taskTime.value)
-                    self.stopTimer()
             }
         }).disposed(by: disposeBag)
     }

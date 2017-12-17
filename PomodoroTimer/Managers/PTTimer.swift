@@ -32,8 +32,8 @@ class PTTimer {
     
     // MARK - Internal methods
     func setupRx() {
-        _currentTime.asObservable().observeOn(MainScheduler.asyncInstance).subscribe(onNext: { [unowned self] value in
-            self.currentTime.onNext(value)
+        _currentTime.asObservable().observeOn(MainScheduler.asyncInstance).subscribe(onNext: { [weak self] value in
+            self?.currentTime.onNext(value)
         }).disposed(by: disposeBag)
     }
     
