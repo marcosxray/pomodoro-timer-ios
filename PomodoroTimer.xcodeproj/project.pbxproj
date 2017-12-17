@@ -159,6 +159,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8D00B8211FE6FC6900D7CDFD /* Accessors */ = {
+			isa = PBXGroup;
+			children = (
+				8D92255B1FE1120B00726CCB /* PTNotification.swift */,
+				8D113ED21FDFC1D100F0488A /* PTTimer.swift */,
+				8DBBE54E1FE12BE800D8C91E /* PTStorage.swift */,
+			);
+			path = Accessors;
+			sourceTree = "<group>";
+		};
 		8D113E941FDFC01600F0488A = {
 			isa = PBXGroup;
 			children = (
@@ -187,9 +197,10 @@
 				09D02FFE1FE1737E00B70334 /* Application */,
 				8D113EDC1FDFCB8E00F0488A /* Model */,
 				8D113ECE1FDFC16C00F0488A /* Resources */,
-				8D2CC1551FE5768F00A4964B /* BaseClasses */,
 				8D113ECF1FDFC17300F0488A /* Managers */,
+				8D00B8211FE6FC6900D7CDFD /* Accessors */,
 				8D113ED11FDFC18500F0488A /* Features */,
+				8D2CC1551FE5768F00A4964B /* BaseClasses */,
 				09D02FBA1FE0385800B70334 /* Extensions */,
 				8D113EAC1FDFC01600F0488A /* Info.plist */,
 			);
@@ -227,10 +238,7 @@
 		8D113ECF1FDFC17300F0488A /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				8D113ED21FDFC1D100F0488A /* PTTimer.swift */,
 				8D113ED41FDFC21400F0488A /* PTPomodoroManager.swift */,
-				8D92255B1FE1120B00726CCB /* PTNotification.swift */,
-				8DBBE54E1FE12BE800D8C91E /* PTStorage.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";

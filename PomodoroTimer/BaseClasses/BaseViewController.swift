@@ -9,6 +9,8 @@
 import UIKit
 
 class BaseViewController: UIViewController {
+    
+    // MARK: - Overridden methods
 
     override func viewDidLoad() {
         super.viewDidLoad()

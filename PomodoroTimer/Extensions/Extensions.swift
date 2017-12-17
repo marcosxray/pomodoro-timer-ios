@@ -34,10 +34,6 @@ extension Date {
     var yesterday: Date {
         return Calendar.current.date(byAdding: .day, value: -1, to: self) ?? Date()
     }
-    
-//    var noon: Date {
-//        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self) ?? Date()
-//    }
 }
 
 extension UIColor {
