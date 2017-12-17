@@ -104,7 +104,7 @@ class PTHomeViewController: BaseViewController {
             self.longRestTimeButton.setTitle(value.secondsToFormattedTimeString(), for: .normal)
         }).disposed(by: disposeBag)
         
-        viewModel.taskCounter.asObserver().bind(onNext: { value in
+        viewModel.roundCounter.asObserver().bind(onNext: { value in
             self.roundCounterLabel.text = "\(value)"
             self.roundDisplay.isHidden = value > 0 ? false : true
         }).disposed(by: disposeBag)

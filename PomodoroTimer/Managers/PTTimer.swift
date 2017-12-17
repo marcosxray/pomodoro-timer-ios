@@ -21,10 +21,8 @@ class PTTimer {
     private var disposeBag = DisposeBag()
     
     // MARK: - Initialization methods
-    private init() {
-        _currentTime.asObservable().subscribe(onNext: { [unowned self] value in
-            self.currentTime.onNext(value)
-        }).disposed(by: disposeBag)
+    internal init() {
+        setupRx()
     }
     
     // MARK: - Private methods
@@ -33,6 +31,12 @@ class PTTimer {
     }
     
     // MARK - Internal methods
+    func setupRx() {
+        _currentTime.asObservable().observeOn(MainScheduler.asyncInstance).subscribe(onNext: { [unowned self] value in
+            self.currentTime.onNext(value)
+        }).disposed(by: disposeBag)
+    }
+    
     func start() {
         stop()
         reset()

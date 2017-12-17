@@ -16,7 +16,7 @@ class PTHomeViewModel {
     var taskTime = BehaviorSubject<Int>(value: 0)
     var restTime = BehaviorSubject<Int>(value: 0)
     var longRestTime = BehaviorSubject<Int>(value: 0)
-    var taskCounter = BehaviorSubject<Int>(value: 0)
+    var roundCounter = BehaviorSubject<Int>(value: 0)
     var timerStatus = BehaviorSubject<TimerStatus>(value: .none)
     
     let taskOptions = [20 * 60,
@@ -62,8 +62,8 @@ class PTHomeViewModel {
             self.longRestTime.onNext(value)
         }).disposed(by: disposeBag)
         
-        pomodoroManager.taskCounter.asObservable().subscribe(onNext: { [unowned self] value in
-            self.taskCounter.onNext(value)
+        pomodoroManager.roundCounter.asObservable().subscribe(onNext: { [unowned self] value in
+            self.roundCounter.onNext(value)
         }).disposed(by: disposeBag)
         
         pomodoroManager.timerStatus.asObservable().subscribe(onNext: { [unowned self] state in

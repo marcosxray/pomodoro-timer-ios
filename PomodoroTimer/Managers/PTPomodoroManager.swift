@@ -25,7 +25,7 @@ class PTPomodoroManager {
     var taskTime = Variable<Int>(PTConstants.initialTaskTime)
     var restTime = Variable<Int>(PTConstants.initialRestTime)
     var longRestTime = Variable<Int>(PTConstants.initialLongRestTime)
-    var taskCounter = Variable<Int>(0)
+    var roundCounter = Variable<Int>(0)
     var _timerStatus = Variable<TimerStatus>(.none)
     
     var disposeBag = DisposeBag()
@@ -33,10 +33,15 @@ class PTPomodoroManager {
     fileprivate var runningTaskTime: Int = 0
     
     // MARK: Private variables
-    private let timer = PTTimer.shared
+    private let timer: PTTimer
     
     // MARK: - Initialization methods
-    init() {
+    init(timer: PTTimer? = nil) {
+        if let timer = timer {
+            self.timer = timer
+        } else {
+            self.timer = PTTimer.shared
+        }
         setupRx()
     }
     
@@ -74,43 +79,38 @@ class PTPomodoroManager {
         self.currentTime.asObserver().filter({ $0 == 0 }).subscribe(onNext: { [unowned self] _ in
 
             switch self._timerStatus.value {
-                
+
             case .task:
-                if self.taskCounter.value < PTConstants.pomodoroRounds {
+                if self.roundCounter.value < PTConstants.pomodoroRounds {
                     self._timerStatus.value = .rest
                 } else {
                     self._timerStatus.value = .longRest
-                    self.taskCounter.value = 0
+                    self.roundCounter.value = 0
                 }
-                
+
                 self.pomodoroDidFinish()
-                
+
             case .rest, .longRest:
                 self._timerStatus.value = .task
-                
+
             default:
-                self.taskCounter.value = 0
+                self.roundCounter.value = 0
             }
-            
+
         }).disposed(by: disposeBag)
-        
-        
-        self._timerStatus.asObservable().subscribe(onNext: { [unowned self] state in
-            
+
+
+        self._timerStatus.asObservable().observeOn(MainScheduler.asyncInstance).subscribe(onNext: { [unowned self] state in
+
             if state != .none {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     self.startTimer()
-                    if state == .task { self.taskCounter.value += 1 }
-                }
+                    if state == .task { self.roundCounter.value += 1 }
             } else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                    self.taskCounter.value = 0
+                    self.roundCounter.value = 0
                     self.currentTime.onNext(self.taskTime.value)
                     self.stopTimer()
-                }
             }
         }).disposed(by: disposeBag)
-        
     }
     
     private func startTimer() {
