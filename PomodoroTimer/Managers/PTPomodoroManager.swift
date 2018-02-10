@@ -20,20 +20,20 @@ class PTPomodoroManager {
     
     // MARK: - Internal variables
     var currentTime = BehaviorSubject<Int>(value: PTConstants.initialTaskTime)
-    var timerStatus = BehaviorSubject<TimerStatus>(value: .none)
-    
     var taskTime = Variable<Int>(PTConstants.initialTaskTime)
     var restTime = Variable<Int>(PTConstants.initialRestTime)
     var longRestTime = Variable<Int>(PTConstants.initialLongRestTime)
     var roundCounter = Variable<Int>(0)
-    var _timerStatus = Variable<TimerStatus>(.none)
-    
     var disposeBag = DisposeBag()
     
-    fileprivate var runningTaskTime: Int = 0
+    var timerStatus: Observable<TimerStatus> {
+        return _timerStatus.asObservable()
+    }
     
     // MARK: Private variables
     private let timer: PTTimer
+    private var _timerStatus = Variable<TimerStatus>(.none)
+    fileprivate var runningTaskTime: Int = 0
     
     // MARK: - Initialization methods
     init(timer: PTTimer? = nil) {
@@ -48,11 +48,7 @@ class PTPomodoroManager {
     // MARK: - Private methods
     private func setupRx() {
         
-        _timerStatus.asObservable().subscribe(onNext: { [weak self] value in
-            self?.timerStatus.onNext(value)
-        }).disposed(by: disposeBag)
-        
-        timer.currentTime.asObserver().subscribe(onNext: { [weak self] value in
+        timer.currentTime.subscribe(onNext: { [weak self] value in
             
             if let existingSelf = self {
                 guard value == 0 else {
@@ -78,7 +74,7 @@ class PTPomodoroManager {
         
         
         self.currentTime.asObserver().filter({ $0 == 0 }).subscribe(onNext: { [weak self] _ in
-
+            
             if let existingSelf = self {
                 
                 switch existingSelf._timerStatus.value {
@@ -99,12 +95,12 @@ class PTPomodoroManager {
                     existingSelf.roundCounter.value = 0
                 }
             }
-
+            
         }).disposed(by: disposeBag)
-
-
+        
+        
         self._timerStatus.asObservable().observeOn(MainScheduler.asyncInstance).subscribe(onNext: { [weak self] state in
-
+            
             if let existingSelf = self {
                 if state != .none {
                     existingSelf.startTimer()

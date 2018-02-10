@@ -13,28 +13,19 @@ class PTTimer {
     
     // MARK: - Internal variables
     static let shared = PTTimer()
-    var currentTime = BehaviorSubject<Int>(value: 0)
+    
+    var currentTime: Observable<Int> {
+        return _currentTime.asObservable()
+    }
     
     // MARK: - Private variables
     private var timer = Timer()
     private var _currentTime = Variable<Int>(0)
     private var disposeBag = DisposeBag()
     
-    // MARK: - Initialization methods
-    internal init() {
-        setupRx()
-    }
-    
     // MARK: - Private methods
     @objc private func updateCurrentTime() {
         _currentTime.value += 1
-    }
-    
-    // MARK - Internal methods
-    func setupRx() {
-        _currentTime.asObservable().observeOn(MainScheduler.asyncInstance).subscribe(onNext: { [weak self] value in
-            self?.currentTime.onNext(value)
-        }).disposed(by: disposeBag)
     }
     
     func start() {
@@ -53,3 +44,4 @@ class PTTimer {
         _currentTime.value = 0
     }
 }
+
