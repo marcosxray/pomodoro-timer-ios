@@ -1,8 +1,8 @@
 # README #
 
-Pomodoro Timer.
+Pomodoro Timer. An iOS app to let users do the Pomodoro technique (https://en.wikipedia.org/wiki/Pomodoro_Technique).
 
-### Instalação ###
+### Installation ###
 
 This project uses Cocoapods as the dependency manager.
 After downloading the source code, run the 'pod install' command in the project folder.
