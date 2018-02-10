@@ -4,14 +4,18 @@ Pomodoro Timer.
 
 ### Instalação ###
 
-Este projeto utiliza o Cocoapods como gerenciador de dependências.
-Após baixar o código-fonte, rodar o comando 'pod install' na pasta do projeto.
+This project uses Cocoapods as the dependency manager.
+After downloading the source code, run the 'pod install' command in the project folder.
 
-### Considerações sobre o projeto ###
+### Project considerations ###
 
-* Acredito que a interface é auto-explicativa, em termos de funcionamento
-* O Aplicativo funciona em iPhones, rodando iOS 8 e superior (inclusive 4S)
-* Utilizei o UserDefaults para guardar a lista de pomodoros executados (achei que seria overkill utilizar Core Data)
-* Fiz alguns testes unitátios básicos
-* Fiz alguns testes de interface básicos. Para rodar o teste de interface, a contante "timeout" deve receber um valor superior ao valor de 'PTConstants.initialTaskTime', para que seja feita a correta contabilização de uma task completa (pomodoro.ststus = finished)
+* I believe that the interface is self-explanatory, in terms of functionality
+
+* The app works on iPhones, running iOS 8 and later (including 4S)
+
+* I used UserDefaults to save the list of executed pomodoros (I thought it would be overkill to use Core Data)
+
+* I did some basic unit tests
+
+* I did some basic interface tests. In order to run the interface test, the timeout constant must receive a value greater than the value of 'PTConstants.initialTaskTime', so that way a complete task count can be done (pomodoro.status = finished)
 
